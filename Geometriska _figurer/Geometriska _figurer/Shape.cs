@@ -2,68 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Geometriska__figurer
+
+namespace Geometriska_figurer
 {
-    public class Shape : Program
+    public enum ShapeType
     {
-        //Fält
+        Rectangle,
+        Ellipse
+    }
+    public abstract class Shape
+    {
+        // Fält
         private double _length;
         private double _width;
 
-        //Egenkaper
+        // Egenskaper
         public abstract double Area { get; }
-
 
         public double Length
         {
             get { return _length; }
-
             set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentException();
-
                 }
-
                 _length = value;
-
             }
         }
-
-        public double Perimeter { get; }
+        public abstract double Perimeter { get; }
 
         public double Width
         {
             get { return _width; }
-
             set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentException();
-
                 }
-
                 _width = value;
-
             }
         }
 
-        //Konstruktor
+        // Konstruktor
         protected Shape(double length, double width)
         {
-              Length = _length;
-              Width = _width;
-
+            Length = length;
+            Width = width;
         }
 
+        /// <summary>
+        /// Metodens uppgift är att överskugga basklassen objekt
+        /// </summary>
+        /// <returns>En sträng med objektets längd, bredd, omkrets och area.</returns>
         public override string ToString()
         {
-
-           
-
+            return string.Format("\n{0,-10} | {1,10:F2}\n{2,-10} | {3,10:F2}\n{4,-10} | {5,10:F2}\n{6,-10} | {7,10:F2}", "Längd", Length, "Bredd", Width, "Omkrets", Perimeter, "Area", Area);
         }
     }
 }

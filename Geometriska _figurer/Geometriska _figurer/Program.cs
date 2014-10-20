@@ -4,12 +4,151 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geometriska__figurer
+namespace Geometriska_figurer
 {
     class Program
     {
+        /// <summary>
+        /// Metod som via paramtern shapetime bestämmer om det är en rektangel eller ellips som ska skapas.
+        /// Den läser in längd och bredd och skapar objekt.
+        /// </summary>
+        /// <param name="shapeType"></param>
+        /// <returns>En refens till objektet</returns>
+        private static Shape CreatShape(ShapeType shapeType)
+            {
+            
+    
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("=============================");
+
+                if (shapeType == ShapeType.Rectangle)
+                {
+                    Console.WriteLine("=        Rektangel          =");
+                }
+                else
+                {
+                    Console.WriteLine("=        Ellips             =");
+                }
+                Console.WriteLine("=============================\n");
+                Console.ResetColor();
+  
+                double length = ReadDoubleGreaterThanZero("Ange längden: ");
+                double width = ReadDoubleGreaterThanZero("Ange höjden: ");
+
+                if (shapeType == ShapeType.Rectangle)
+                {
+                    return new Rectangle(length, width);
+                }
+                else
+                {
+                    return new Ellipse(length, width);
+                }
+            }
+    
+        /// <summary>
+        /// Metoden main som har till uppgift att hantera valen som användaren gör. 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
+            do
+            {
+                ViewMenu();
+                switch (Console.ReadLine())
+                {
+                    case "0":
+                        return;
+                    case "1":
+                        ViewShapeDetail(CreatShape(ShapeType.Ellipse));
+                        break;
+                    case "2":
+                        ViewShapeDetail(CreatShape(ShapeType.Rectangle));
+                        break;
+                    default:
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\n Fel! Ange ett nummer mellan 0 och 21.");
+                        Console.ResetColor();
+                        break;
+                }
+
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\n Tryck tangent för att fortsätta ");
+                    Console.ResetColor();
+                    Console.CursorVisible = false;
+                    Console.ReadKey(true);
+                    Console.CursorVisible = true;
+            } 
+            while (true);
+            }
+
+        /// <summary>
+        /// Metod som används för att läsa in flyttal som används för höjd och längd.
+        /// Till metoden skickas argument av typen string som visas i samband med inmatningen.
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <returns>Värdet av typen double </returns>
+            private static double ReadDoubleGreaterThanZero(string prompt)
+            {     
+                double userInput;
+                do
+                {
+                    Console.Write(prompt);
+                    if (double.TryParse(Console.ReadLine(), out userInput) && userInput > 0d)
+                    {
+                        return userInput;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nVärdet måste vara ett tal större än 0!");
+                        Console.ResetColor();
+                    }
+             
+                }while (true);
+            
+            }
+                
+            /// <summary>
+            /// Denna metoden har till uppgift att visa menyn
+            /// </summary>
+            private static void ViewMenu()
+            {
+                 
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("============================");
+                Console.WriteLine("=                          =");
+                Console.WriteLine("=   Geometriska Figurer    =");
+                Console.WriteLine("=                          =");
+                Console.WriteLine("============================");
+                Console.ResetColor();
+                Console.WriteLine("\n0. Avsluta\n\n1. Ellips\n\n2. Rekangel\n");
+                Console.WriteLine("============================\n");
+                Console.Write("Ange menyval [0-2]: ");
+            }
+             
+            /// <summary>
+            /// Denna metod har till uppgift att visa figurens alla mått.
+            /// Detta görs med hjälp utav den överskuggade metoden ToString.
+            /// </summary>
+            /// <param name="shape"></param>
+            private static void ViewShapeDetail(Shape shape)
+            {
+           
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n==============================");
+                Console.WriteLine("= Detaljer                   =");
+                Console.WriteLine("==============================");
+                Console.ResetColor();
+                Console.WriteLine(shape.ToString());
+            }
         }
-    }
-}
+     }
+                

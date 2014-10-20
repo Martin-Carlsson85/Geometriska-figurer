@@ -6,23 +6,22 @@ using System.Threading.Tasks;
 
 namespace Geometriska_figurer
 {
-    public class Rectangle : Shape
+    public class Ellipse : Shape
     {
         //Egenskaper
         public override double Area
         {
-            get { return Length * Width; }
-
+            get { return Math.PI * (Length / 2) * (Width / 2); }
         }
 
-        
+
         public override double Perimeter
         {
-            get { return 2 * Length + 2 * Width; }
+            get { return (Math.PI * Math.Sqrt(2 * (Length / 2) * (Length / 2) + 2 * (Width / 2) * (Width / 2))); }
         }
 
         //Konstruktor
-        public Rectangle(double length, double width)
+        public Ellipse(double length, double width)
             : base(length, width)
         {
 
