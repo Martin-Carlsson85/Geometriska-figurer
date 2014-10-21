@@ -9,15 +9,14 @@ namespace Geometriska_figurer
     class Program
     {
         /// <summary>
-        /// Metod som via paramtern shapetime bestämmer om det är en rektangel eller ellips som ska skapas.
-        /// Den läser in längd och bredd och skapar objekt.
+        /// Ska läsa in en figurs längs och bredd, skapa objekt och returna en refens till det. 
+        /// Metoden ska ha en parameter av typen ShapeType vars värde bestämmer om en ellips eller rektangel ska skapas.
         /// </summary>
         /// <param name="shapeType"></param>
         /// <returns>En refens till objektet</returns>
         private static Shape CreatShape(ShapeType shapeType)
             {
-            
-    
+           
                 Console.Clear();
                 Console.BackgroundColor = ConsoleColor.DarkGreen;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -48,9 +47,11 @@ namespace Geometriska_figurer
             }
     
         /// <summary>
-        /// Metoden main som har till uppgift att hantera valen som användaren gör. 
+        /// Metoden main anropar metoden ViewMenu för att visa menyn. Väljer användaren att inte avsluta applikationen ska metoden CreateShape anropas som skapar och
+        /// returnerar en referens till ett ellips- eller rectangel-objekt.
+        /// Referensen till objektet används sedan vid anrop av ViewDetail som presenterar figurens detaljer.
+        /// När beräknigen är gjord visas menyn på nytt. 
         /// </summary>
-        /// <param name="args"></param>
         static void Main(string[] args)
         {
             do
@@ -69,7 +70,7 @@ namespace Geometriska_figurer
                     default:
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("\n Fel! Ange ett nummer mellan 0 och 21.");
+                        Console.WriteLine("\n Fel! Ange ett nummer mellan 0 och 2.");
                         Console.ResetColor();
                         break;
                 }
@@ -86,8 +87,9 @@ namespace Geometriska_figurer
             }
 
         /// <summary>
-        /// Metod som används för att läsa in flyttal som används för höjd och längd.
-        /// Till metoden skickas argument av typen string som visas i samband med inmatningen.
+        /// Metoden returnerar ett värde av typen double som är större än 0. Man kan skicka ett argument till metoden. 
+        /// Argumentet ska vara en sträng med info som ska visas där man matar in värdet.
+        /// Om man matar in fel värde får man ett felmeddelande och en ny chans att mata in rätt värde.
         /// </summary>
         /// <param name="prompt"></param>
         /// <returns>Värdet av typen double </returns>
@@ -112,7 +114,8 @@ namespace Geometriska_figurer
                 }while (true);
             
             }
-                
+             
+   
             /// <summary>
             /// Denna metoden har till uppgift att visa menyn
             /// </summary>
@@ -134,8 +137,10 @@ namespace Geometriska_figurer
             }
              
             /// <summary>
-            /// Denna metod har till uppgift att visa figurens alla mått.
-            /// Detta görs med hjälp utav den överskuggade metoden ToString.
+            /// Denna metod har till uppgift att visa figurens alla detaljer.
+            /// Vid anrop av metoden skickas ett argument med som referear till figuren och detaljerna ska prenseteras.
+            /// Parametern Shape referer till figuren.
+            /// Basklassen Shape överskuggar metoden ToString
             /// </summary>
             /// <param name="shape"></param>
             private static void ViewShapeDetail(Shape shape)
@@ -144,7 +149,7 @@ namespace Geometriska_figurer
                 Console.BackgroundColor = ConsoleColor.DarkGreen;
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("\n==============================");
-                Console.WriteLine("= Detaljer                   =");
+                Console.WriteLine("=         Detaljer           =");
                 Console.WriteLine("==============================");
                 Console.ResetColor();
                 Console.WriteLine(shape.ToString());
