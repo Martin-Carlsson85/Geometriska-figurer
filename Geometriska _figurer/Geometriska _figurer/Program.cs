@@ -15,37 +15,37 @@ namespace Geometriska_figurer
         /// <param name="shapeType"></param>
         /// <returns>En refens till objektet</returns>
         private static Shape CreatShape(ShapeType shapeType)
+        {
+
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("=============================");
+
+            if (shapeType == ShapeType.Rectangle)
             {
-           
-                Console.Clear();
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("=============================");
-
-                if (shapeType == ShapeType.Rectangle)
-                {
-                    Console.WriteLine("=        Rektangel          =");
-                }
-                else
-                {
-                    Console.WriteLine("=        Ellips             =");
-                }
-                Console.WriteLine("=============================\n");
-                Console.ResetColor();
-  
-                double length = ReadDoubleGreaterThanZero("Ange längden: ");
-                double width = ReadDoubleGreaterThanZero("Ange höjden: ");
-
-                if (shapeType == ShapeType.Rectangle)
-                {
-                    return new Rectangle(length, width);
-                }
-                else
-                {
-                    return new Ellipse(length, width);
-                }
+                Console.WriteLine("=        Rektangel          =");
             }
-    
+            else
+            {
+                Console.WriteLine("=        Ellips             =");
+            }
+            Console.WriteLine("=============================\n");
+            Console.ResetColor();
+
+            double length = ReadDoubleGreaterThanZero("Ange längden: ");
+            double width = ReadDoubleGreaterThanZero("Ange höjden: ");
+
+            if (shapeType == ShapeType.Rectangle)
+            {
+                return new Rectangle(length, width);
+            }
+            else
+            {
+                return new Ellipse(length, width);
+            }
+        }
+
         /// <summary>
         /// Metoden main anropar metoden ViewMenu för att visa menyn. Väljer användaren att inte avsluta applikationen ska metoden CreateShape anropas som skapar och
         /// returnerar en referens till ett ellips- eller rectangel-objekt.
@@ -75,16 +75,16 @@ namespace Geometriska_figurer
                         break;
                 }
 
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("\n Tryck tangent för att fortsätta ");
-                    Console.ResetColor();
-                    Console.CursorVisible = false;
-                    Console.ReadKey(true);
-                    Console.CursorVisible = true;
-            } 
-            while (true);
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n Tryck tangent för att fortsätta ");
+                Console.ResetColor();
+                Console.CursorVisible = false;
+                Console.ReadKey(true);
+                Console.CursorVisible = true;
             }
+            while (true);
+        }
 
         /// <summary>
         /// Metoden returnerar ett värde av typen double som är större än 0. Man kan skicka ett argument till metoden. 
@@ -93,67 +93,67 @@ namespace Geometriska_figurer
         /// </summary>
         /// <param name="prompt"></param>
         /// <returns>Värdet av typen double </returns>
-            private static double ReadDoubleGreaterThanZero(string prompt)
-            {     
-                double userInput;
-                do
+        private static double ReadDoubleGreaterThanZero(string prompt)
+        {
+            double userInput;
+            do
+            {
+                Console.Write(prompt);
+                if (double.TryParse(Console.ReadLine(), out userInput) && userInput > 0d)
                 {
-                    Console.Write(prompt);
-                    if (double.TryParse(Console.ReadLine(), out userInput) && userInput > 0d)
-                    {
-                        return userInput;
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("\nVärdet måste vara ett tal större än 0!");
-                        Console.ResetColor();
-                    }
-             
-                }while (true);
-            
-            }
-             
-   
-            /// <summary>
-            /// Denna metoden har till uppgift att visa menyn
-            /// </summary>
-            private static void ViewMenu()
-            {
-                 
-                Console.Clear();
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("============================");
-                Console.WriteLine("=                          =");
-                Console.WriteLine("=   Geometriska Figurer    =");
-                Console.WriteLine("=                          =");
-                Console.WriteLine("============================");
-                Console.ResetColor();
-                Console.WriteLine("\n0. Avsluta\n\n1. Ellips\n\n2. Rekangel\n");
-                Console.WriteLine("============================\n");
-                Console.Write("Ange menyval [0-2]: ");
-            }
-             
-            /// <summary>
-            /// Denna metod har till uppgift att visa figurens alla detaljer.
-            /// Vid anrop av metoden skickas ett argument med som referear till figuren och detaljerna ska prenseteras.
-            /// Parametern Shape referer till figuren.
-            /// Basklassen Shape överskuggar metoden ToString
-            /// </summary>
-            /// <param name="shape"></param>
-            private static void ViewShapeDetail(Shape shape)
-            {
-           
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n==============================");
-                Console.WriteLine("=         Detaljer           =");
-                Console.WriteLine("==============================");
-                Console.ResetColor();
-                Console.WriteLine(shape.ToString());
-            }
+                    return userInput;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\nVärdet måste vara ett tal större än 0!");
+                    Console.ResetColor();
+                }
+
+            } while (true);
+
         }
-     }
-                
+
+
+        /// <summary>
+        /// Denna metoden har till uppgift att visa menyn
+        /// </summary>
+        private static void ViewMenu()
+        {
+
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("============================");
+            Console.WriteLine("=                          =");
+            Console.WriteLine("=   Geometriska Figurer    =");
+            Console.WriteLine("=                          =");
+            Console.WriteLine("============================");
+            Console.ResetColor();
+            Console.WriteLine("\n0. Avsluta\n\n1. Ellips\n\n2. Rekangel\n");
+            Console.WriteLine("============================\n");
+            Console.Write("Ange menyval [0-2]: ");
+        }
+
+        /// <summary>
+        /// Denna metod har till uppgift att visa figurens alla detaljer.
+        /// Vid anrop av metoden skickas ett argument med som referear till figuren och detaljerna ska prenseteras.
+        /// Parametern Shape referer till figuren.
+        /// Basklassen Shape överskuggar metoden ToString
+        /// </summary>
+        /// <param name="shape"></param>
+        private static void ViewShapeDetail(Shape shape)
+        {
+
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n==============================");
+            Console.WriteLine("=         Detaljer           =");
+            Console.WriteLine("==============================");
+            Console.ResetColor();
+            Console.WriteLine(shape.ToString());
+        }
+    }
+}
+

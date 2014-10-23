@@ -14,6 +14,7 @@ namespace Geometriska_figurer
         Rectangle,
         Ellipse
     }
+
     public abstract class Shape
     {
         // Fält
@@ -67,7 +68,8 @@ namespace Geometriska_figurer
         /// <returns>Metoden returnerar en sträng representerad av värdet av en instans.</returns>
         public override string ToString()
         {
-            return string.Format("\n{0,-10} | {1,10:F2}\n{2,-10} | {3,10:F2}\n{4,-10} | {5,10:F2}\n{6,-10} | {7,10:F2}", "Längd", Length, "Bredd", Width, "Omkrets", Perimeter, "Area", Area);
+            return string.Format("\nLängd      | {0,10:F2}\nBredd      | {1,10:F2}\nOmkrets    | {2,10:F2}\nArea       | {3,10:F2}", 
+                Length, Width, Perimeter, Area);
         }
     }
 }
